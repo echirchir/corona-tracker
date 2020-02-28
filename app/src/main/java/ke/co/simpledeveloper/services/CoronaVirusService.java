@@ -80,7 +80,8 @@ public class CoronaVirusService extends Service {
 
         mServiceHandler.post(new Runnable() {
 
-            static final long DELAY = 3000000;
+            //check for updates every 12 hours;
+            static final long DELAY = 43200000;
 
             @Override
             public void run() {
@@ -100,7 +101,7 @@ public class CoronaVirusService extends Service {
                     } else {
                         isRunning = false;
                         CoronaVirusService.this.stopSelf();
-                        Toast.makeText(CoronaVirusService.this, "Turn ON your data bundles to connect!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CoronaVirusService.this, "Turn ON your 4G data bundles to connect!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -153,6 +154,7 @@ public class CoronaVirusService extends Service {
         }
     }
 
+    //handle create or update functions
     private void saveOrUpdateRecord(CSVRecord record, Realm realm){
 
         Log.d("RESULTEXT", record.get("Province/State"));
@@ -173,6 +175,7 @@ public class CoronaVirusService extends Service {
 
     }
 
+    //do create for the record
     private void createRecord(CSVRecord record, Realm realm){
 
         RealmResults<CoronaRecord> allRecords = realm.where(CoronaRecord.class).findAll().sort("id", Sort.ASCENDING);
@@ -207,6 +210,7 @@ public class CoronaVirusService extends Service {
         });
     }
 
+    //do updates for each record
     private void updateRecord(final CoronaRecord existing, final CSVRecord record, Realm realm){
 
         realm.executeTransaction(new Realm.Transaction() {

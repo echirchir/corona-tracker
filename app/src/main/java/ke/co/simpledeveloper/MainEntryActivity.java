@@ -1,6 +1,8 @@
 package ke.co.simpledeveloper;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -9,7 +11,9 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class FullscreenActivity extends AppCompatActivity {
+import ke.co.simpledeveloper.services.CoronaVirusService;
+
+public class MainEntryActivity extends AppCompatActivity {
 
     private static final boolean AUTO_HIDE = true;
 
@@ -68,13 +72,48 @@ public class FullscreenActivity extends AppCompatActivity {
         mVisible = true;
         mContentView = findViewById(R.id.fullscreen_content);
 
-        getLatestUpdates();
+        new CoronaServiceAsync().execute();
     }
 
-    private void getLatestUpdates(){
 
+    class CoronaServiceAsync extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            Intent service = new Intent(MainEntryActivity.this, CoronaVirusService.class);
+            startService(service);
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            //do any clean up here or update UI
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(Void aVoid) {
+            super.onCancelled(aVoid);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
     }
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
