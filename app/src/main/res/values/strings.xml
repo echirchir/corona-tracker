@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Corona Virus Tracker</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="stay_healthy_header">THE CORONA VIRUS TRACKER!</string>
+    <string name="get_information">Find out how your country is doing regarding the Corona Virus</string>
+    <string name="show_me_now">SHOW ME NOW</string>
+</resources>

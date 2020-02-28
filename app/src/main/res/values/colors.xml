@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="main_green">#fc8c74</color>
+    <color name="main_blue">#5b448c</color>
+
+    <color name="custom_grey">#5b5b5b</color>
+    <color name="dark_gray">#727272</color>
+    <color name="gray">#fff</color>
+    <color name="mesbackground">#f1f1f1</color>
+</resources>
