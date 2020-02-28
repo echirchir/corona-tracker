@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -96,6 +97,7 @@ public class MainEntryActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            Looper.getMainLooper();
             Intent service = new Intent(MainEntryActivity.this, CoronaVirusService.class);
             startService(service);
 
