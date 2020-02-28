@@ -1,4 +1,4 @@
-package ke.co.simpledeveloper;
+package ke.co.simpledeveloper.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,10 +10,14 @@ import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
+import ke.co.simpledeveloper.R;
 import ke.co.simpledeveloper.services.CoronaVirusService;
 
 public class MainEntryActivity extends AppCompatActivity {
+
+    private AppCompatButton checkItOut;
 
     private static final boolean AUTO_HIDE = true;
 
@@ -67,12 +71,23 @@ public class MainEntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fullscreen);
+        setContentView(R.layout.main_entry_activity);
 
         mVisible = true;
         mContentView = findViewById(R.id.fullscreen_content);
 
         new CoronaServiceAsync().execute();
+
+        checkItOut = findViewById(R.id.check_it_out);
+
+        checkItOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainEntryActivity.this, CoronaListMapActivity.class));
+
+            }
+        });
     }
 
 
@@ -130,7 +145,6 @@ public class MainEntryActivity extends AppCompatActivity {
     }
 
     private void hide() {
-        // Hide UI first
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();

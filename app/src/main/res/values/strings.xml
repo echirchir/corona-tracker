@@ -5,4 +5,8 @@
     <string name="stay_healthy_header">THE CORONA VIRUS TRACKER!</string>
     <string name="get_information">Find out how your country is doing regarding the Corona Virus outbreak!</string>
     <string name="show_me_now">Let\'s Check It Out</string>
+    <string name="title_activity_corona_list_map">Corona Virus Tracker</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

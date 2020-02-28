@@ -12,12 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.CoronaListMapActivity"
+            android:label="@string/title_activity_corona_list_map"></activity>
+
         <service
             android:name=".services.CoronaVirusService"
             android:enabled="true" />
 
         <activity
-            android:name=".MainEntryActivity"
+            android:name=".activities.MainEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme">

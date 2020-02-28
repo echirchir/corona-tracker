@@ -7,7 +7,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.commons.csv.CSVFormat;
@@ -141,7 +140,7 @@ public class CoronaVirusService extends Service {
     }
 
     private void catchCoronaException(IOException exception){
-        Log.i("REQUESTFAILED", "Request failed");
+        //do not catch the virus!! :(
     }
 
     private void handleSuccess(Iterable<CSVRecord> records){
@@ -157,9 +156,7 @@ public class CoronaVirusService extends Service {
     //handle create or update functions
     private void saveOrUpdateRecord(CSVRecord record, Realm realm){
 
-        Log.d("RESULTEXT", record.get("Province/State"));
-
-        String provinceState = record.get("Province/State");
+        String provinceState = record.get("Province/State").trim();
 
         if (!provinceState.isEmpty()){
 

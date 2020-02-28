@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/check_it_out"
                     android:textSize="15sp"
                     android:layout_width="wrap_content"
