@@ -89,37 +89,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private void getLatestUpdates(){
 
-        OkHttpClient client = new OkHttpClient();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(URLS.CONFIRMED_CASES_URL).newBuilder();
-        String url = urlBuilder.build().toString();
-
-        Request request = new Request.Builder().url(url).get().build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-                StringReader csvBodyReader = new StringReader(response.body().string());
-                Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
-
-                for (CSVRecord record : records) {
-
-                    int latestCases = Integer.parseInt(record.get(record.size() - 1));
-                    int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
-
-                    Log.d("RESULTEXT", record.get("Province/State"));
-                    Log.d("RESULTEXT", record.get("Country/Region"));
-                    Log.d("RESULTEXT", record.get("Lat"));
-                    Log.d("RESULTEXT", record.get("Long"));
-                }
-            }
-        });
 
     }
 
