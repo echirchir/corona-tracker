@@ -6,19 +6,85 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 import ke.co.simpledeveloper.R;
+import ke.co.simpledeveloper.adapters.RecordObject;
+import ke.co.simpledeveloper.adapters.RecordsAdapter;
+import ke.co.simpledeveloper.customui.CoronaTextView;
+import ke.co.simpledeveloper.db.CoronaRecord;
+import ke.co.simpledeveloper.helpers.Helpers;
 
 public class HomeFragment extends Fragment {
+
+    private RecordsAdapter adapter;
+    private List<RecordObject> records;
+    private RecyclerView recyclerView;
+    private CoronaTextView generic_empty_view;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerView = rootView.findViewById(R.id.recycler);
+        generic_empty_view = rootView.findViewById(R.id.generic_empty_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+
+        setupListOfRecords();
+
+        return rootView;
+    }
+
+    private void setupListOfRecords(){
+
+        Realm realm = Realm.getDefaultInstance();
+
+        records = new ArrayList<>();
+
+        RealmResults<CoronaRecord> allRecords = realm.where(CoronaRecord.class).findAll().sort("confirmed_cases", Sort.DESCENDING);
+
+        if (!allRecords.isEmpty()){
+            
+            for (CoronaRecord record : allRecords){
+
+                RecordObject recordObject = new RecordObject();
+
+                recordObject.setId(record.getId());
+                recordObject.setCountry_region(record.getCountry_region());
+                recordObject.setDate(Helpers.getCurrentDateFormatted());
+                recordObject.setProvince_state(record.getProvince_state());
+                recordObject.setTotal_cases(record.getConfirmed_cases());
+
+                String description = record.getProvince_state().concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
+
+                recordObject.setDescription(description);
+
+            }
+        }
+
+        adapter = new RecordsAdapter(getActivity(), records);
+
+        recyclerView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        if (adapter.getItemCount() > 0){
+
+            recyclerView.setVisibility(View.VISIBLE);
+            generic_empty_view.setVisibility(View.GONE);
+        }
     }
 }
