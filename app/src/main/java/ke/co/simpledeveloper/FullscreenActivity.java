@@ -3,27 +3,11 @@ package ke.co.simpledeveloper;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.io.StringReader;
-
-import ke.co.simpledeveloper.constants.URLS;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class FullscreenActivity extends AppCompatActivity {
 
@@ -88,8 +72,6 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     private void getLatestUpdates(){
-
-
 
     }
 

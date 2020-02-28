@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 import ke.co.simpledeveloper.constants.URLS;
+import ke.co.simpledeveloper.db.CoronaRecord;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -154,11 +157,17 @@ public class CoronaVirusService extends Service {
 
         Log.d("RESULTEXT", record.get("Province/State"));
 
-        String state = record.get("Province/State");
+        String provinceState = record.get("Province/State");
 
-        if (!state.isEmpty()){
+        if (!provinceState.isEmpty()){
 
+            CoronaRecord existing = realm.where(CoronaRecord.class).equalTo("province_state", provinceState).findFirst();
 
+            if (existing != null){
+                updateRecord(existing, record, realm);
+            }else{
+                createRecord(record, realm);
+            }
 
         }
 
@@ -166,22 +175,58 @@ public class CoronaVirusService extends Service {
 
     private void createRecord(CSVRecord record, Realm realm){
 
-        int latestCases = Integer.parseInt(record.get(record.size() - 1));
-        int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
-        Log.d("RESULTEXT", record.get("Province/State"));
-        Log.d("RESULTEXT", record.get("Country/Region"));
-        Log.d("RESULTEXT", record.get("Lat"));
-        Log.d("RESULTEXT", record.get("Long"));
+        RealmResults<CoronaRecord> allRecords = realm.where(CoronaRecord.class).findAll().sort("id", Sort.ASCENDING);
+
+        long lastRecordId;
+
+        final CoronaRecord coronaRecord = new CoronaRecord();
+
+        if (allRecords.isEmpty()){
+            coronaRecord.setId(1);
+        }else{
+            lastRecordId = allRecords.last().getId();
+            coronaRecord.setId( lastRecordId + 1);
+        }
+
+        coronaRecord.setProvince_state(record.get("Province/State"));
+        coronaRecord.setCountry_region(record.get("Country/Region"));
+        coronaRecord.setLatitude(Double.parseDouble(record.get("Lat")));
+        coronaRecord.setLongitude(Double.parseDouble(record.get("Long")));
+
+        int confirmedCases = Integer.parseInt(record.get(record.size() - 1));
+        int previousCases = Integer.parseInt(record.get(record.size() - 2));
+
+        coronaRecord.setConfirmed_cases(confirmedCases);
+        coronaRecord.setPrevious_day_cases(previousCases);
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@NotNull Realm realm) {
+                realm.copyToRealm(coronaRecord);
+            }
+        });
     }
 
-    private void updateRecord(CSVRecord record, Realm realm){
+    private void updateRecord(final CoronaRecord existing, final CSVRecord record, Realm realm){
 
-        int latestCases = Integer.parseInt(record.get(record.size() - 1));
-        int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
-        Log.d("RESULTEXT", record.get("Province/State"));
-        Log.d("RESULTEXT", record.get("Country/Region"));
-        Log.d("RESULTEXT", record.get("Lat"));
-        Log.d("RESULTEXT", record.get("Long"));
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                existing.setProvince_state(record.get("Province/State"));
+                existing.setCountry_region(record.get("Country/Region"));
+                existing.setLatitude(Double.parseDouble(record.get("Lat")));
+                existing.setLongitude(Double.parseDouble(record.get("Long")));
+
+                int confirmedCases = Integer.parseInt(record.get(record.size() - 1));
+                int previousCases = Integer.parseInt(record.get(record.size() - 2));
+
+                existing.setConfirmed_cases(confirmedCases);
+                existing.setPrevious_day_cases(previousCases);
+
+                realm.copyToRealmOrUpdate(existing);
+            }
+        });
     }
 
     @Override
