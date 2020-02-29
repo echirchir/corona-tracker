@@ -86,7 +86,7 @@ public class MainEntryActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(MainEntryActivity.this, CoronaListMapActivity.class));
-
+                overridePendingTransition(R.anim.enter, R.anim.exit);
             }
         });
     }

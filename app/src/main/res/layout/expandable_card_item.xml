@@ -9,6 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        app:cardBackgroundColor="#C9E9FE"
         android:elevation="@dimen/cardview_default_elevation"
         app:cardUseCompatPadding="true">
 
@@ -34,12 +35,12 @@
             android:id="@+id/expandableView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:expandDuration="1">
+            app:expandDuration="200">
 
         <ke.co.simpledeveloper.customui.CoronaTextView
             android:id="@+id/answer"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="900dp"
             android:paddingBottom="16dp"
             android:gravity="start"
             android:layout_gravity="start"
