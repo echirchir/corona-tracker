@@ -1,10 +1,14 @@
 package ke.co.simpledeveloper.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,7 +36,7 @@ public class CoronaListMapActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(new HomeFragment());
-        toolbar.setTitle("Corona Virus Tracker");
+        toolbar.setTitle(R.string.activity_title);
     }
 
     private void openFragment(Fragment fragment) {
@@ -59,6 +63,61 @@ public class CoronaListMapActivity extends AppCompatActivity {
                     return false;
                 }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.disclaimer:
+                showDisclaimer();
+                return true;
+            case R.id.about_us:
+                showAboutUs();
+                return true;
+            case R.id.exit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showDisclaimer(){
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.disclaimer_title)
+                .setMessage(R.string.disclaimer_message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }
+        ).show();
+
+    }
+
+    private void showAboutUs(){
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.about_title)
+                .setMessage(R.string.about_developer)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                    }
+        ).show();
+
+    }
 
     @Override
     public void onBackPressed() {

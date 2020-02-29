@@ -157,4 +157,12 @@ If you think a surface may be infected, clean it with simple disinfectant to kil
         Taking self-medication such as antibiotics
         In any case, if you have fever, cough and difficulty breathing seek medical care early to reduce the risk of developing a more severe infection and be sure to share your recent travel history with your health care provider.
     </string>
+    <string name="disclaimer">Data Disclaimer</string>
+    <string name="about">About Us</string>
+    <string name="exit">Exit</string>
+    <string name="disclaimer_title">Coronavirus Data Disclaimer</string>
+    <string name="disclaimer_message">This Coronavirus tracking app provides the data as received from the relevant institutions and does not, by any means, claim to be 100% accurate. The developer of the app has ensured that the data is correct to the best of his knowledge. In case of missing data (from certain countries), it simply means the data source did not provide it. In case of any errors, please contact him through elisha.java@gmail.com</string>
+    <string name="about_developer">My name is Elisha C - a software developer who is passionate about technology. When the Kenyan officials allowed flights from mainland China  (the epicenter of the Coronavirus) to land in Kenya, showing utter disregard for the health of the citizens, I felt compelled to create this app as a way to educate the people on how to protect themselves from the pandemic! If you have any questions, you can reach me through my email: elisha.java@gmail.com</string>
+    <string name="about_title">About the developer</string>
+    <string name="activity_title">Coronavirus Tracker</string>
 </resources>

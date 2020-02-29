@@ -26,23 +26,28 @@
             tools:text="Tap to expand" />
     </androidx.cardview.widget.CardView>
 
-    <ke.co.simpledeveloper.customui.ExpandableLinearLayout
-        android:id="@+id/expandableView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:expandDuration="1">
+        android:layout_height="match_parent">
+
+        <ke.co.simpledeveloper.customui.ExpandableLinearLayout
+            android:id="@+id/expandableView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:expandDuration="1">
 
         <ke.co.simpledeveloper.customui.CoronaTextView
             android:id="@+id/answer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="700dp"
             android:paddingBottom="16dp"
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
+            android:gravity="start"
+            android:layout_gravity="start"
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:paddingStart="16dp"
             android:textSize="20sp"/>
 
-    </ke.co.simpledeveloper.customui.ExpandableLinearLayout>
+        </ke.co.simpledeveloper.customui.ExpandableLinearLayout>
+    </ScrollView>
 </LinearLayout>
