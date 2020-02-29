@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:elevation="@dimen/cardview_default_elevation"
+        app:cardUseCompatPadding="true">
+
+        <ke.co.simpledeveloper.customui.CoronaTextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="16dp"
+            android:paddingStart="8dp"
+            android:paddingTop="16dp"
+            android:textSize="20sp"
+            tools:text="Tap to expand" />
+    </androidx.cardview.widget.CardView>
+
+    <ke.co.simpledeveloper.customui.ExpandableLinearLayout
+        android:id="@+id/expandableView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:expandDuration="1">
+
+        <ke.co.simpledeveloper.customui.CoronaTextView
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="16dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="16dp"
+            android:textSize="20sp"/>
+
+    </ke.co.simpledeveloper.customui.ExpandableLinearLayout>
+</LinearLayout>

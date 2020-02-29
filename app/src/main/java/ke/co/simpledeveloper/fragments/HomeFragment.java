@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
         RealmResults<CoronaRecord> allRecords = realm.where(CoronaRecord.class).findAll().sort("confirmed_cases", Sort.DESCENDING);
 
         if (!allRecords.isEmpty()){
-            
+
             for (CoronaRecord record : allRecords){
 
                 RecordObject recordObject = new RecordObject();
@@ -68,9 +68,11 @@ public class HomeFragment extends Fragment {
                 recordObject.setProvince_state(record.getProvince_state());
                 recordObject.setTotal_cases(record.getConfirmed_cases());
 
-                String description = record.getProvince_state().concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
+                String description = record.getProvince_state().concat(" in ").concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
 
                 recordObject.setDescription(description);
+
+                records.add(recordObject);
 
             }
         }

@@ -13,11 +13,7 @@ public class Helpers {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        if ((month + 1) < 10){
-            return year +"-" + "0" + (month+1) +"-" + day;
-        }else{
-            return day +"-" + (month+1) +"-" + year;
-        }
+        return day +"-" + (month+1) +"-" + year;
 
     }
 }
