@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Corona Virus Tracker</string>
+    <string name="app_name">Coronavirus Tracker</string>
 
     <string name="stay_healthy_header">THE CORONAVIRUS TRACKER!</string>
-    <string name="get_information">Find out how your country is doing regarding the Corona Virus outbreak!</string>
+    <string name="get_information">Find out how your country is doing regarding the Coronavirus outbreak!</string>
     <string name="show_me_now">Let\'s Check It Out</string>
     <string name="title_activity_corona_list_map">Coronavirus Tracker</string>
     <string name="title_home">Home</string>
@@ -85,7 +85,7 @@ If you are in an area where there is an outbreak of COVID-19 you need to take th
     <string name="answer_9">
         While we are still learning about how COVID-2019 affects people, older persons and persons with pre-existing medical conditions (such as high blood pressure, heart disease, or diabetes) appear to develop serious illness more often than others.
     </string>
-    <string name="question_10">Are antibiotics effective in preventing or treating the COVID-19?</string>
+    <string name="question_10">Are antibiotics effective in preventing/treating COVID-19?</string>
     <string name="answer_10">
         No. Antibiotics do not work against viruses, they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19. They should only be used as directed by a physician to treat a bacterial infection.
     </string>
@@ -126,7 +126,7 @@ Perform hand hygiene after touching or discarding the mask – Use alcohol-based
     <string name="answer_15">
         The “incubation period” means the time between catching the virus and beginning to have symptoms of the disease. Most estimates of the incubation period for COVID-19 range from 1-14 days, most commonly around five days. These estimates will be updated as more data become available.
     </string>
-    <string name="question_16">Can humans become infected with the COVID-19 from an animal source?</string>
+    <string name="question_16">Can humans become infected from an animal source?</string>
     <string name="answer_16">
         Coronaviruses are a large family of viruses that are common in animals. Rarely, people get infected with these viruses which may then spread to other people. For example, SARS-CoV was associated with civet cats and MERS-CoV is transmitted by dromedary camels. Possible animal sources of COVID-19 have not yet been confirmed.
 
