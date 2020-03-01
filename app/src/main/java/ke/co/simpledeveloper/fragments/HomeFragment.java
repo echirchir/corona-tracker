@@ -1,10 +1,12 @@
 package ke.co.simpledeveloper.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,8 +31,17 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private CoronaTextView generic_empty_view;
 
+    private Realm realm;
+
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -49,8 +60,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupListOfRecords(){
-
-        Realm realm = Realm.getDefaultInstance();
 
         records = new ArrayList<>();
 
@@ -71,7 +80,8 @@ public class HomeFragment extends Fragment {
                 recordObject.setId(record.getId());
                 recordObject.setCountry_region(record.getCountry_region());
                 recordObject.setDate(Helpers.getCurrentDateFormatted());
-                recordObject.setTotal_cases(record.getConfirmed_cases());
+                String totalCasesOverDeaths = "".concat(String.valueOf(record.getConfirmed_cases()).concat(" / ").concat(String.valueOf(record.getConfirmed_deaths())));
+                recordObject.setTotal_cases(totalCasesOverDeaths);
 
                 String description = recordObject.getProvince_state().concat(" in ").concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
 
@@ -93,5 +103,12 @@ public class HomeFragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
             generic_empty_view.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        realm.close();
     }
 }

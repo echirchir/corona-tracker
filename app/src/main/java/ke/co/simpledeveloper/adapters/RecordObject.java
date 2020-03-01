@@ -10,7 +10,7 @@ public class RecordObject {
 
     private String country_region;
 
-    private int total_cases;
+    private String total_cases;
 
     private String date;
 
@@ -18,7 +18,7 @@ public class RecordObject {
 
     public RecordObject(){}
 
-    public RecordObject(long id, String province_state, String country_region, int total_cases, String date, String description) {
+    public RecordObject(long id, String province_state, String country_region, String total_cases, String date, String description) {
         this.id = id;
         this.province_state = province_state;
         this.country_region = country_region;
@@ -51,11 +51,11 @@ public class RecordObject {
         this.country_region = country_region;
     }
 
-    public int getTotal_cases() {
+    public String getTotal_cases() {
         return total_cases;
     }
 
-    public void setTotal_cases(int total_cases) {
+    public void setTotal_cases(String total_cases) {
         this.total_cases = total_cases;
     }
 

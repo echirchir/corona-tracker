@@ -62,13 +62,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 if (!provinceState.isEmpty()){
                     caseRecord = realm.where(CoronaCaseRecord.class).equalTo("province_state", provinceState).findFirst();
                     if (caseRecord != null){
-                        mMap.addMarker(new MarkerOptions().position(state).title(record.getProvince_state().concat(": ").concat(String.valueOf(caseRecord.getConfirmed_cases()))));
+                        mMap.addMarker(new MarkerOptions().position(state).title(caseRecord.getProvince_state().concat(" - confirmed cases: ").concat(String.valueOf(caseRecord.getConfirmed_cases())).concat(" and deaths: ").concat(String.valueOf(caseRecord.getConfirmed_deaths()))));
                     }
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(state));
                 }else if (!countryRegion.isEmpty()){
                     caseRecord = realm.where(CoronaCaseRecord.class).equalTo("country_region", countryRegion).findFirst();
                     if (caseRecord != null){
-                        mMap.addMarker(new MarkerOptions().position(state).title(record.getProvince_state().concat(": ").concat(String.valueOf(caseRecord.getConfirmed_cases()))));
+                        mMap.addMarker(new MarkerOptions().position(state).title(caseRecord.getCountry_region().concat(" - confirmed cases: ").concat(String.valueOf(caseRecord.getConfirmed_cases())).concat(" and deaths: ").concat(String.valueOf(caseRecord.getConfirmed_deaths()))));
                     }
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(state));
                 }

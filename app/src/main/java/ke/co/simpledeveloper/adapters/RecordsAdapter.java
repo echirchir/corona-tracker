@@ -37,7 +37,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         RecordObject record = recordObjects.get(position);
 
         holder.description.setText(record.getDescription());
-        holder.totalCases.setText(String.valueOf(record.getTotal_cases()));
+        holder.totalCases.setText(record.getTotal_cases());
         holder.province.setText(record.getProvince_state());
         holder.date.setText(record.getDate());
 
