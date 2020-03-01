@@ -19,7 +19,7 @@ import ke.co.simpledeveloper.R;
 import ke.co.simpledeveloper.adapters.RecordObject;
 import ke.co.simpledeveloper.adapters.RecordsAdapter;
 import ke.co.simpledeveloper.customui.CoronaTextView;
-import ke.co.simpledeveloper.db.CoronaRecord;
+import ke.co.simpledeveloper.db.CoronaCaseRecord;
 import ke.co.simpledeveloper.helpers.Helpers;
 
 public class HomeFragment extends Fragment {
@@ -54,21 +54,26 @@ public class HomeFragment extends Fragment {
 
         records = new ArrayList<>();
 
-        RealmResults<CoronaRecord> allRecords = realm.where(CoronaRecord.class).findAll().sort("confirmed_cases", Sort.DESCENDING);
+        RealmResults<CoronaCaseRecord> allRecords = realm.where(CoronaCaseRecord.class).findAll().sort("confirmed_cases", Sort.DESCENDING);
 
         if (!allRecords.isEmpty()){
 
-            for (CoronaRecord record : allRecords){
+            for (CoronaCaseRecord record : allRecords){
 
                 RecordObject recordObject = new RecordObject();
+
+                if (record.getProvince_state().isEmpty()){
+                    recordObject.setProvince_state(record.getCountry_region());
+                }else{
+                    recordObject.setProvince_state(record.getProvince_state());
+                }
 
                 recordObject.setId(record.getId());
                 recordObject.setCountry_region(record.getCountry_region());
                 recordObject.setDate(Helpers.getCurrentDateFormatted());
-                recordObject.setProvince_state(record.getProvince_state());
                 recordObject.setTotal_cases(record.getConfirmed_cases());
 
-                String description = record.getProvince_state().concat(" in ").concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
+                String description = recordObject.getProvince_state().concat(" in ").concat(record.getCountry_region()).concat(" has recorded a total of ".concat(String.valueOf(record.getConfirmed_cases())).concat(" cases "));
 
                 recordObject.setDescription(description);
 

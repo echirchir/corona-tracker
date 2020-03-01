@@ -18,7 +18,8 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 import ke.co.simpledeveloper.R;
-import ke.co.simpledeveloper.db.CoronaRecord;
+import ke.co.simpledeveloper.db.CoronaCaseRecord;
+import ke.co.simpledeveloper.db.CoronaDeathRecord;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -46,14 +47,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         Realm realm = Realm.getDefaultInstance();
 
-        RealmResults<CoronaRecord> records = realm.where(CoronaRecord.class).findAll().sort("id", Sort.ASCENDING);
+        RealmResults<CoronaDeathRecord> records = realm.where(CoronaDeathRecord.class).findAll().sort("id", Sort.ASCENDING);
 
         if (!records.isEmpty()){
 
-            for (CoronaRecord record : records){
+            for (CoronaDeathRecord record : records){
+
+                String provinceState = record.getProvince_state();
+                String countryRegion = record.getCountry_region();
+
                 LatLng state = new LatLng(record.getLatitude(), record.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(state).title(record.getProvince_state().concat(": ").concat(String.valueOf(record.getConfirmed_cases()))));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(state));
+                CoronaCaseRecord caseRecord = null;
+
+                if (!provinceState.isEmpty()){
+                    caseRecord = realm.where(CoronaCaseRecord.class).equalTo("province_state", provinceState).findFirst();
+                    if (caseRecord != null){
+                        mMap.addMarker(new MarkerOptions().position(state).title(record.getProvince_state().concat(": ").concat(String.valueOf(caseRecord.getConfirmed_cases()))));
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(state));
+                }else if (!countryRegion.isEmpty()){
+                    caseRecord = realm.where(CoronaCaseRecord.class).equalTo("country_region", countryRegion).findFirst();
+                    if (caseRecord != null){
+                        mMap.addMarker(new MarkerOptions().position(state).title(record.getProvince_state().concat(": ").concat(String.valueOf(caseRecord.getConfirmed_cases()))));
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(state));
+                }
             }
         }
 
